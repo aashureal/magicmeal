@@ -2,19 +2,25 @@ const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema(
   {
-    name: String,
+    name: {
+      type: String,
+      required: true,
+    },
     email: { type: String, unique: true },
-    password: String,
+    password: {
+      type: String,
+      required: true,
+    },
 
     // dietaryPreferences: [String], // ["vegan", "low-carb"]
     // cuisinePreferences: [String], // ["Indian", "Italian"]
 
     searchHistory: [
       {
-        queryIngredients: [String], // user ne kya ingredients diye
-        dietary: [String], // restrictions at search time
-        cuisine: String, // cuisine type at search time
-        recipesSuggested: [String], // sirf recipe titles store karenge
+        queryIngredients: [String],
+        dietary: [String],
+        cuisine: String,
+        recipesSuggested: [String],
         searchedAt: { type: Date, default: Date.now },
       },
     ],
@@ -22,4 +28,5 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
+module.exports = User;
