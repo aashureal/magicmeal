@@ -83,4 +83,16 @@ const loginUser = async (req, res) => {
     res.status(500).json({ success: false, message: "Server Error" });
   }
 };
-module.exports = { registerUser, loginUser };
+
+// User Logout Controller
+const logoutUser = (req, res) => {
+  // Clear the cookie where JWT is stored
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+  });
+
+  res.status(200).json({ message: "Logged out successfully" });
+};
+module.exports = { registerUser, loginUser, logoutUser };
