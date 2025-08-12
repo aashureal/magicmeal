@@ -7,6 +7,7 @@ connectTodatabase();
 
 // Routers
 const authRouter = require("./src/routes/auth.routes");
+const recipeRouter = require("./src/routes/recipe.routes");
 
 // Root
 app.get("/", (req, res) => {
@@ -15,8 +16,9 @@ app.get("/", (req, res) => {
 
 // APIs
 app.use("/api/auth", authRouter);
+app.use("/api/recipe", recipeRouter);
 
 // Run Server
 app.listen(3000, () => {
-  console.log("Server is runnng on port 3000");
+  console.log("Server is running on port 3000");
 });
